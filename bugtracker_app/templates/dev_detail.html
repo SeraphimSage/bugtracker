@@ -1,0 +1,47 @@
+{% extends "base.html" %} {% block content %}
+<nav>
+	<a href="/">Main Page</a>
+	<a href="/addbug?">Found a new bug</a>
+	<a href="logout/">Logout</a>
+</nav>
+
+{% if not user %}
+<h1>I'm not finding that dev. Are you sure they exist?</h1>
+
+{% else %}
+<h2>This dev is assigned or found these bugs.</h2>
+<h3>New Tickets</h3>
+{% for bug in bugs_by %}
+<ul>
+	{% if bug.completion_status_choice == "NE" %}
+	<li><a href="/bug/{{bug.id}}/">{{bug.title}}</a></li>
+	{% endif %}
+</ul>
+{% endfor %}
+
+<h3>Bugs in progress</h3>
+{% for bug in bugs_by %}
+<ul>
+	{% if bug.completion_status_choice == "IN" %}
+	<li><a href="/bug/{{bug.id}}/">{{bug.title}}</a></li>
+	{% endif %}
+</ul>
+{% endfor %}
+
+<h3>Completed Bugs</h3>
+{% for bug in bugs_by %}
+<ul>
+	{% if bug.completion_status_choice == "DO" %}
+	<li><a href="/bug/{{bug.id}}/">{{bug.title}}</a></li>
+	{% endif %}
+</ul>
+{% endfor %}
+
+<h3>Invalid Bugs</h3>
+{% for bug in bugs_by %}
+<ul>
+	{% if bug.completion_status_choice == "IN" %}
+	<li><a href="/bug/{{bug.id}}/">{{bug.title}}</a></li>
+	{% endif %}
+</ul>
+{% endfor %} {% endif %} {% endblock %}

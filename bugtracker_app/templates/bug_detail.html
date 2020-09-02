@@ -1,0 +1,26 @@
+{% extends "base.html" %} {% block content %}
+<nav>
+	<a href="/">Main Page</a>
+	<a href="/logout/">Logout</a>
+</nav>
+<h1>Bug Title: {{bug.title}}</h1>
+<h2>Bug Description: {{bug.description}}</h2>
+<h3>Bug Status: {{bug.completion_status_choice}}</h3>
+<h3>Who found it?: {{bug.assigned_by_dev}}</h3>
+<h3>Who's working on it?: {{bug.assigned_to_dev}}</h3>
+<h3>Who finished it?: {{bug.completed_by_dev}}</h3>
+<h3>Found on: {{bug.time_date}}</h3>
+<nav>
+	<a href="/bug/{{bug.id}}/edit/"><button>Edit Bug</button></a>
+	<a href="/inprogress/{{bug.id}}/"><button>Move to In Progress</button></a>
+	<a href="/completed/{{bug.id}}/"><button>Move to completed</button></a>
+	<a href="/invalid/{{bug.id}}/"><button>Mark as Invalid</button></a>
+</nav>
+<br />
+<p>Completion status description</p>
+<p>Completion status NE = New</p>
+<p>Completion status IP = In Progress</p>
+<p>Completion status CO = Completed</p>
+<p>Completion status IN = Invalid</p>
+
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends 'base.html' %} {% block content %}
+<h1>{{request.user.is_authenticated}}</h1>
+<div>
+	<nav>
+		<a href="addbug/">Found a new bug!</a>
+		{% if request.user.is_authenticated %}
+		<a href="logout/">Logout</a>
+		{% else %}
+		<a href="login/">Login</a>
+		{% endif %}
+	</nav>
+	<h3>Welcome, {{ request.user.username}}</h3>
+
+	<h2>New</h2>
+	{% for bug in bugs %}
+	<ul>
+		{% if bug.completion_status_choice == "NE" %}
+		<ul>
+			<li><a href="/bug/{{bug.id}}/">{{ bug.title }} </a></li>
+		</ul>
+		{% endif %}
+	</ul>
+	{% endfor %}
+
+	<h2>In Progress</h2>
+	{% for bug in bugs %}
+	<ul>
+		{% if bug.completion_status_choice == "IP" %}
+		<ul>
+			<li><a href="/bug/{{bug.id}}/">{{ bug.title }} </a></li>
+		</ul>
+		{% endif %}
+	</ul>
+	{% endfor %}
+
+	<h2>Completed</h2>
+	{% for bug in bugs %}
+	<ul>
+		{% if bug.completion_status_choice == "DO" %}
+		<ul>
+			<li><a href="/bug/{{bug.id}}/">{{ bug.title }} </a></li>
+		</ul>
+		{% endif %}
+	</ul>
+	{% endfor %}
+
+	<h2>Invalid</h2>
+	{% for bug in bugs %}
+	<ul>
+		{% if bug.completion_status_choice == "IN" %}
+		<ul>
+			<li><a href="/bug/{{bug.id}}/">{{ bug.title }} </a></li>
+		</ul>
+		{% endif %}
+	</ul>
+	{% endfor %}
+</div>
+{% endblock content %}
